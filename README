@@ -1,50 +1,23 @@
 # Differential Equations — Tangent Field Visualizer
 
-## Objective
+## 🎯 Objective
 
-This project visualizes **tangent fields** (a.k.a. slope fields / direction fields) for first-order differential equations of the form `y' = f(t, y)`. Using `matplotlib`'s `streamplot`, each script draws the vector field associated with a given equation and overlays example solution curves (streamlines) starting from chosen initial points.
+This project provides a visual exploration of **tangent fields** (also known as slope fields or direction fields) for first-order ordinary differential equations (ODEs) of the form:
 
-This is a useful way to visually understand the behavior of a differential equation's solutions without solving it analytically.
+$$ y' = f(t, y) $$
 
-## Requirements
+Using `matplotlib`'s `streamplot` functionality, these scripts generate vector fields representing the direction of solutions at any point in the plane. By overlaying **streamlines** (solution curves) from specific initial conditions, the tool allows users to intuitively understand the behavior of differential equations without requiring an analytical solution.
 
-Install dependencies with pip:
+### Key Features
+- **Visual Analysis:** Instantly grasp stability, equilibrium points, and solution trends.
+- **Flexible Input:** Supports custom functions $f(t, y)$.
+- **Streamline Overlay:** Traces specific solution paths from user-defined starting points.
+
+---
+
+## 📦 Requirements
+
+Ensure you have Python 3.6+ installed. Install the necessary dependencies via pip:
 
 ```bash
 pip install numpy matplotlib
-```
-
-## Scripts
-
-### 1. `champ_simple.py` (logistic-type equation)
-
-Plots the tangent field of:
-y' = y - y²
-
-Includes several starting points to trace example solution curves (streamlines in red).
-
-Run it:
-```bash
-python champ_simple.py
-```
-
-### 2. `champ_typed.py` (temperature/Newton's cooling-type equation)
-
-A more structured version using Python type aliases (`Coordinates`, `Matrix`). Plots the tangent field of:
-T'(t) = -(T(t) - 2·cos(t))
-
-with 20 evenly-spaced starting points along the diagonal of the plotting window.
-
-Run it:
-```bash
-python champ_typed.py
-```
-
-## How it works
-
-Both scripts share the same core function `champ(F, a, b, c, d, N, x0)`:
-
-- Builds a grid of `N × N` points over `[a, b] × [c, d]` using `np.meshgrid`
-- Evaluates the vector field `F(X, Y)` at every grid point, returning the horizontal (`FX`) and vertical (`FY`) components
-- Draws the full field with `plt.streamplot`
-- If starting points `x0` are given, overlays specific solution trajectories in red, with a thicker line width
